@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
         boolean shouldAttachToParentImmediatly = false;
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediatly);
-        ContactViewHolder viewHolder = new ContactViewHolder(view, 1);
+        ContactViewHolder viewHolder = new ContactViewHolder(view);
 
         return viewHolder;
     }
@@ -55,6 +56,7 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
     /** View Holder below**/
     class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView listItemContactView;
+        Button editContact;
 
 
         @Override
@@ -63,10 +65,11 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
             mOnClickListener.onListItemClick(clickedPosition);
         }
 
-        public ContactViewHolder(View itemView, int listItemContactView) {
+        public ContactViewHolder(View itemView) {
             super(itemView);
             this.listItemContactView = (TextView) itemView.findViewById(R.id.tv_item_contact);
-            itemView.setOnClickListener(this);
+            this.editContact = (Button) itemView.findViewById(R.id.edit_contact);
+            editContact.setOnClickListener(this);
         }
 
 

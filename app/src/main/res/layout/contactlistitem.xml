@@ -5,7 +5,8 @@
     android:padding="16dp" >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/contact_holder">
     <TextView
         android:id="@+id/tv_item_contact"
         android:layout_width="wrap_content"
@@ -13,11 +14,12 @@
         android:fontFamily="monospace"
         android:textSize="42sp"
         android:layout_alignParentLeft="true"/>
+
         <Button
+            android:id="@+id/edit_contact"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:background="@mipmap/edit_contact"
-            android:id="@+id/edit_contact"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/edit_contact" />
     </RelativeLayout>
 </FrameLayout>
