@@ -57,6 +57,7 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
     class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView listItemContactView;
         Button editContact;
+        Button deleteContact;
 
 
         @Override
@@ -69,6 +70,8 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
             super(itemView);
             this.listItemContactView = (TextView) itemView.findViewById(R.id.tv_item_contact);
             this.editContact = (Button) itemView.findViewById(R.id.edit_contact);
+            this.deleteContact = (Button) itemView.findViewById(R.id.delete);
+            deleteContact.setOnClickListener(this);
             editContact.setOnClickListener(this);
         }
 
