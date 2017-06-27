@@ -7,16 +7,32 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.daimajia.swipe.util.Attributes;
+import com.example.sage.basiclayouts.dao.Person;
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by sage on 6/13/17.
  */
 
 public class MainActivity extends AppCompatActivity implements WhiteListDisplay.ListItemClickListener {
 
-    private static final int CONTACT_LIST_ITEMS = 100;
-    private WhiteListDisplay mAdapter;
     private RecyclerView mContactList;
     private Toast mToast;
+
+    Person sage = new Person();
+    Person john = new Person();
+    Person jane = new Person();
+    //TODO set first and last names of the above people as well as phone numbers
+    private Person[] adapterData = new Person[] {sage, john,jane};
+    private ArrayList<Person> mDataSet = new ArrayList(Arrays.asList(adapterData));
+    private WhiteListDisplay mAdapter = new WhiteListDisplay(mDataSet, this);
+
+
+
 
 
 
@@ -30,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements WhiteListDisplay.
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mContactList.setLayoutManager(layoutManager);
         mContactList.setHasFixedSize(true);
-        mAdapter = new WhiteListDisplay(CONTACT_LIST_ITEMS, this);
+        mAdapter = new WhiteListDisplay(mDataSet, this);
         mContactList.setAdapter(mAdapter);
     }
 

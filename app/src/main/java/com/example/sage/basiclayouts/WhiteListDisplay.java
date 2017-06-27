@@ -11,11 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.sage.basiclayouts.dao.Person;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.ContactViewHolder> {
 
-    private int mNumberItems;
+    private ArrayList<Person> mDataSet;
 
     public interface ListItemClickListener{
         void onListItemClick (int clickedItemIndex);
@@ -23,8 +26,8 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
 
     final private ListItemClickListener mOnClickListener;
 
-    public WhiteListDisplay(int numberOfItems, ListItemClickListener listener){
-        mNumberItems = numberOfItems;
+    public WhiteListDisplay(ArrayList<Person> dataSet, ListItemClickListener listener){
+         mDataSet = dataSet ;
         mOnClickListener = listener;
     }
 
@@ -50,7 +53,7 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
 
     @Override
     public int getItemCount() {
-        return mNumberItems;
+        return mDataSet.size();
     }
 
     /** View Holder below**/
@@ -77,7 +80,10 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
 
 
         void bind(int listIndex) {
-            listItemContactView.setText(String.valueOf(listIndex));
+            Person contact = mDataSet.get(listIndex);
+            String firstName = contact.getFirstName();
+            String lastName = contact.getLastName();
+            listItemContactView.setText(firstName + " " + lastName);
         }
 
 
