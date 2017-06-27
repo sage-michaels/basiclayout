@@ -66,7 +66,11 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
         @Override
         public void onClick(View v) {
             int clickedPosition = getAdapterPosition();
-            mOnClickListener.onListItemClick(clickedPosition);
+            if (v == deleteContact){
+                mDataSet.remove(clickedPosition);
+            } else{
+                mOnClickListener.onListItemClick(clickedPosition);
+            }
         }
 
         public ContactViewHolder(View itemView) {

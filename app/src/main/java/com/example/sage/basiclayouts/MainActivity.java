@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity implements WhiteListDisplay.
     private RecyclerView mContactList;
     private Toast mToast;
 
-    Person sage = new Person();
-    Person john = new Person();
-    Person jane = new Person();
+    Person sage = new Person("Sage","Michaels","0018587768475");
+    Person john = new Person("John","Smith","12345678910");
+    Person jane = new Person("Jane","Doe","10987654321");
     //TODO set first and last names of the above people as well as phone numbers
     private Person[] adapterData = new Person[] {sage, john,jane};
     private ArrayList<Person> mDataSet = new ArrayList(Arrays.asList(adapterData));

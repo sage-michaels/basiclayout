@@ -37,10 +37,10 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public Person() {
-        this.setFirstName("");
-        this.setLastName("");
-        this.setPhoneNumber("");
+    public Person(String firstName,String lastName, String phoneNumber) {
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setPhoneNumber(phoneNumber);
     }
 
     @Override
