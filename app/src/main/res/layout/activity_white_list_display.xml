@@ -49,7 +49,8 @@
             android:layout_height="match_parent"
             android:layout_below="@id/ListIcon"
             android:layout_weight="0.77"
-            android:id="@+id/whitelist"></android.support.v7.widget.RecyclerView>
+            android:id="@+id/whitelist"
+            android:paddingBottom="5dp"></android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

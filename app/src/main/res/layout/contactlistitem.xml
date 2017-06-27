@@ -51,7 +51,7 @@
 
             <TextView
                 android:id="@+id/tv_item_contact"
-                android:textSize="43sp"
+                android:textSize="40sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"

@@ -27,7 +27,7 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
     final private ListItemClickListener mOnClickListener;
 
     public WhiteListDisplay(ArrayList<Person> dataSet, ListItemClickListener listener){
-         mDataSet = dataSet ;
+        mDataSet = dataSet ;
         mOnClickListener = listener;
     }
 
@@ -68,6 +68,9 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
             int clickedPosition = getAdapterPosition();
             if (v == deleteContact){
                 mDataSet.remove(clickedPosition);
+                notifyItemRemoved(clickedPosition);
+                notifyItemRangeChanged(clickedPosition, mDataSet.size());
+                //TODO make sure contact is removed from memory
             } else{
                 mOnClickListener.onListItemClick(clickedPosition);
             }

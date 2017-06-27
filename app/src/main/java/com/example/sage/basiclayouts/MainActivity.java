@@ -26,8 +26,13 @@ public class MainActivity extends AppCompatActivity implements WhiteListDisplay.
     Person sage = new Person("Sage","Michaels","0018587768475");
     Person john = new Person("John","Smith","12345678910");
     Person jane = new Person("Jane","Doe","10987654321");
-    //TODO set first and last names of the above people as well as phone numbers
-    private Person[] adapterData = new Person[] {sage, john,jane};
+    Person carlos = new Person("Carlos","Mancia","188849339203");
+    Person larry = new Person("Larry", "David", "9948573920");
+    Person larryR = new Person("Larry","Rubin","99573663842");
+    Person danny = new Person("Danny","Lim","885930521");
+    Person lebron = new Person("Lebron", "James", "55473648");
+    Person luke = new Person("Luke","Skywalker","994739958");
+    private Person[] adapterData = new Person[] {luke,sage, john,larry,jane,danny,carlos, larryR,lebron};
     private ArrayList<Person> mDataSet = new ArrayList(Arrays.asList(adapterData));
     private WhiteListDisplay mAdapter = new WhiteListDisplay(mDataSet, this);
 
@@ -45,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements WhiteListDisplay.
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mContactList.setLayoutManager(layoutManager);
-        mContactList.setHasFixedSize(true);
+        mContactList.setHasFixedSize(false);
         mAdapter = new WhiteListDisplay(mDataSet, this);
         mContactList.setAdapter(mAdapter);
     }
