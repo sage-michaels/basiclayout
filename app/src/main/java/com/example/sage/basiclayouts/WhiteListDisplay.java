@@ -1,6 +1,8 @@
 package com.example.sage.basiclayouts;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +18,7 @@ import com.example.sage.basiclayouts.dao.Person;
 import java.util.ArrayList;
 import java.util.List;
 
-public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.ContactViewHolder> {
+public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.ContactViewHolder>{
 
     private ArrayList<Person> mDataSet;
 
@@ -29,6 +31,9 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
     public WhiteListDisplay(ArrayList<Person> dataSet, ListItemClickListener listener){
         mDataSet = dataSet ;
         mOnClickListener = listener;
+    }
+    public void CreateNewContact(View view){
+        //TODO use an intent to create a new element in the WhiteListDisplay once user enters contact info
     }
 
 
@@ -71,7 +76,7 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
                 notifyItemRemoved(clickedPosition);
                 notifyItemRangeChanged(clickedPosition, mDataSet.size());
                 //TODO make sure contact is removed from memory
-            } else{
+            }else{
                 mOnClickListener.onListItemClick(clickedPosition);
             }
         }
@@ -92,8 +97,6 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
             String lastName = contact.getLastName();
             listItemContactView.setText(firstName + " " + lastName);
         }
-
-
     }
 }
 

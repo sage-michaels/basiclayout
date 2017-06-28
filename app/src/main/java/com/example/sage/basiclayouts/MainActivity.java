@@ -1,5 +1,6 @@
 package com.example.sage.basiclayouts;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,6 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity implements WhiteListDisplay.ListItemClickListener {
 
     private RecyclerView mContactList;
-    private Toast mToast;
 
     Person sage = new Person("Sage","Michaels","0018587768475");
     Person john = new Person("John","Smith","12345678910");
@@ -57,11 +57,7 @@ public class MainActivity extends AppCompatActivity implements WhiteListDisplay.
 
 
     public void onListItemClick(int clickedItemIndex) {
-        if (mToast != null){
-            mToast.cancel();
-        }
-        String toastMessage = "item #" + clickedItemIndex +"clicked.";
-        mToast = Toast.makeText(this, toastMessage, Toast.LENGTH_LONG);
-        mToast.show();
+        Intent intent = new Intent(mContactList.getContext(), ContactPage.class );
+        startActivity(intent);
     }
 }
