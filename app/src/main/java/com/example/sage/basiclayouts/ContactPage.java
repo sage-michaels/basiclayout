@@ -16,8 +16,8 @@ import com.example.sage.basiclayouts.dao.Person;
 
 public class ContactPage extends AppCompatActivity implements View.OnClickListener {
     private EditText firstName;
-    private EditText lastName = (EditText) findViewById(R.id.lastNameInput);
-    private EditText phoneNumber = (EditText) findViewById(R.id.phoneNumberInput);
+    private EditText lastName;
+    private EditText phoneNumber;
     private Button submitContact;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class ContactPage extends AppCompatActivity implements View.OnClickListen
         lastName = (EditText) findViewById(R.id.lastNameInput);
         phoneNumber = (EditText) findViewById(R.id.phoneNumberInput);
         submitContact = (Button) findViewById(R.id.add_contact);
+        //submitContact.setOnClickListener(this);
     }
 
 
@@ -41,13 +42,6 @@ public class ContactPage extends AppCompatActivity implements View.OnClickListen
         return this.phoneNumber.getText().toString();
     }
 
-    public ContactPage(){
-        this.submitContact = (Button) findViewById(R.id.submit);
-        this.firstName = (EditText) findViewById(R.id.firstNameInput);
-        this.lastName = (EditText) findViewById(R.id.lastNameInput);
-        this.phoneNumber = (EditText) findViewById(R.id.phoneNumberInput);
-        this.submitContact.setOnClickListener(this);
-    }
 
 
 
