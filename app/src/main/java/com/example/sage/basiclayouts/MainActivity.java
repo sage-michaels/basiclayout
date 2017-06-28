@@ -56,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements WhiteListDisplay.
             public void onClick(View v) {
                 Intent intent = new Intent(mContactList.getContext(), ContactPage.class );
                 startActivity(intent);
+                //Bundle emptyContactLocation = new Bundle();
+                //startActivityForResult(intent,emptyContactLocation);
+                //TODO when new contact is to be created send Bundle containing location with intent
             }
         });
 
@@ -70,5 +73,8 @@ public class MainActivity extends AppCompatActivity implements WhiteListDisplay.
     public void onListItemClick(int clickedItemIndex) {
         Intent intent = new Intent(mContactList.getContext(), ContactPage.class );
         startActivity(intent);
+        //TODO send second parameter startActivity(intent, option) where option is a bundled reference to the
+        //TODO to-be-edited contacts current location in memory so that the edit view hints can be changed
+        //TODO to the current firstname, lastname, and phonenumber of the contact (THIS IS OPTIONAL)
     }
 }

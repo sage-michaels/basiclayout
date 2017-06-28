@@ -14,7 +14,7 @@ import com.example.sage.basiclayouts.dao.Person;
  * Created by sage on 6/27/17.
  */
 
-public class ContactPage extends AppCompatActivity implements View.OnClickListener {
+public class ContactPage extends AppCompatActivity {//implements View.OnClickListener {
     private EditText firstName;
     private EditText lastName;
     private EditText phoneNumber;
@@ -28,7 +28,14 @@ public class ContactPage extends AppCompatActivity implements View.OnClickListen
         lastName = (EditText) findViewById(R.id.lastNameInput);
         phoneNumber = (EditText) findViewById(R.id.phoneNumberInput);
         submitContact = (Button) findViewById(R.id.add_contact);
-        //submitContact.setOnClickListener(this);
+        //submitContact.setOnClickListener(new View.OnClickListener() {
+           // @Override
+            //public void onClick(View v) {
+                //TODO upon click store Json encoding of Person
+                //TODO pass new person's address in memory to WhiteListDisplay using intents.
+              //  Person person = new Person(getFirstName(),getLastName(),getPhoneNumber());
+            //}
+        //});
     }
 
 
@@ -42,13 +49,6 @@ public class ContactPage extends AppCompatActivity implements View.OnClickListen
         return this.phoneNumber.getText().toString();
     }
 
-
-
-
-    public void onClick(View view){
-        //TODO upon click store Person containing the firstName, lastName, phoneNumber in memory
-        //TODO pass new person's address in memory to WhiteListDisplay using intents.
-    }
 
 
 }
