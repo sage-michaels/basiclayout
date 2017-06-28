@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.daimajia.swipe.util.Attributes;
@@ -22,6 +24,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity implements WhiteListDisplay.ListItemClickListener {
 
     private RecyclerView mContactList;
+    private Button makeContact;
 
     Person sage = new Person("Sage","Michaels","0018587768475");
     Person john = new Person("John","Smith","12345678910");
@@ -47,6 +50,14 @@ public class MainActivity extends AppCompatActivity implements WhiteListDisplay.
         setContentView(R.layout.activity_white_list_display);
 
         mContactList = (RecyclerView) findViewById(R.id.whitelist);
+        makeContact = (Button) findViewById(R.id.add_contact);
+        makeContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContactList.getContext(), ContactPage.class );
+                startActivity(intent);
+            }
+        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mContactList.setLayoutManager(layoutManager);

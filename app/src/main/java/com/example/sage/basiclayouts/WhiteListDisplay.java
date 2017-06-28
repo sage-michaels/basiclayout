@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +30,8 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
     final private ListItemClickListener mOnClickListener;
 
     public WhiteListDisplay(ArrayList<Person> dataSet, ListItemClickListener listener){
-        mDataSet = dataSet ;
-        mOnClickListener = listener;
+        this.mDataSet = dataSet;
+        this.mOnClickListener = listener;
     }
     public void CreateNewContact(View view){
         //TODO use an intent to create a new element in the WhiteListDisplay once user enters contact info
