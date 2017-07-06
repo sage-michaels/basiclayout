@@ -1,5 +1,7 @@
 package com.example.sage.basiclayouts.dao;
 
+import android.os.Bundle;
+
 /**
  * Created by ido on 11/06/17.
  */
@@ -38,9 +40,9 @@ public class Person {
     }
 
     public Person(String firstName,String lastName, String phoneNumber) {
-        this.setFirstName(firstName);
-        this.setLastName(lastName);
-        this.setPhoneNumber(phoneNumber);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
     }
 
     @Override

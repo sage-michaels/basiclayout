@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BasicLayouts</string>
+    <string name="submit">Add this contact to the whitelist</string>
 </resources>
