@@ -9,15 +9,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.daimajia.swipe.util.Attributes;
 import com.example.sage.basiclayouts.dao.Person;
+import com.example.sage.basiclayouts.dao.PersonDao;
 import com.example.sage.basiclayouts.dao.PersonDaoImpl;
-
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by sage on 6/13/17.
@@ -27,11 +22,11 @@ public class MainActivity extends AppCompatActivity implements ListItemClickList
 
     private RecyclerView mContactList;
     private Button makeContact;
-    public PersonDaoImpl contactsInMemory = new PersonDaoImpl();
+    public PersonDao contactsInMemory = new PersonDaoImpl();
     public Context context = this;
 
 
-    private WhiteListDisplay mAdapter = new WhiteListDisplay(this, contactsInMemory);
+    private WhiteListDisplay mAdapter = new WhiteListDisplay(this);
 
 
 
@@ -70,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements ListItemClickList
 
 
     public void onListItemClick(int clickedItemIndex) {
-        Person toEdit = this.mAdapter.mDataSet.get(clickedItemIndex);
+        Person toEdit = this.mAdapter.contactsInMemory.get(clickedItemIndex);
         String toEditNumber = toEdit.getPhoneNumber();
         Intent intent = new Intent(context, ContactPage.class );
         intent.putExtra("number", toEditNumber);

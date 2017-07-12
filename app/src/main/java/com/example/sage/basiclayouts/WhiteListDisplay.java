@@ -1,12 +1,6 @@
 package com.example.sage.basiclayouts;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.widget.TextViewCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,29 +11,21 @@ import android.widget.TextView;
 import com.example.sage.basiclayouts.dao.Person;
 import com.example.sage.basiclayouts.dao.PersonDaoImpl;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.ContactViewHolder>{
 
-    public PersonDaoImpl mDataSet;
+    public PersonDaoImpl contactsInMemory;
     private Collection<Person> mContactList;
 
 
     private ListItemClickListener mOnClickListener;
 
-    public WhiteListDisplay(ListItemClickListener listener, PersonDaoImpl memory){
+    public WhiteListDisplay(ListItemClickListener listener){
         this.mOnClickListener = listener;
-        this.mDataSet = memory;
-        this.mContactList = mDataSet.load();
+        this.mContactList = contactsInMemory.load();
 
     }
-    public void CreateNewContact(View view){
-        //TODO use an intent to create a new element in the WhiteListDisplay once user enters contact info
-    }
-
-
 
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -61,7 +47,7 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
 
     @Override
     public int getItemCount() {
-        return mDataSet.size();
+        return contactsInMemory.size();
     }
 
     /** View Holder below**/
@@ -75,11 +61,11 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
         public void onClick(View clickedView) {
             int clickedPosition = getAdapterPosition();
             if (clickedView == deleteContact){
-                Person toDelete = mDataSet.get(clickedPosition);
-                mDataSet.delete(toDelete);
+                Person toDelete = contactsInMemory.get(clickedPosition);
+                contactsInMemory.delete(toDelete);
                 notifyItemRemoved(clickedPosition);
-                notifyItemRangeChanged(clickedPosition, mDataSet.size());
-                mContactList = mDataSet.load();
+                notifyItemRangeChanged(clickedPosition, contactsInMemory.size());
+                mContactList = contactsInMemory.load();
                 //TODO make sure contact is removed from memory
             }else{
                 mOnClickListener.onListItemClick(clickedPosition);
@@ -97,7 +83,7 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
 
 
         void bind(int listIndex) {
-            Person contact = mDataSet.get(listIndex);
+            Person contact = contactsInMemory.get(listIndex);
             String firstName = contact.getFirstName();
             String lastName = contact.getLastName();
             listItemContactView.setText(firstName + " " + lastName);
