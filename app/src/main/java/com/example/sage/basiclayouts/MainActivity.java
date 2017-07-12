@@ -59,6 +59,15 @@ public class MainActivity extends AppCompatActivity implements ListItemClickList
         mContactList.setAdapter(mAdapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+
+
 
     public void onListItemClick(int clickedItemIndex) {
         Person toEdit = this.mAdapter.mDataSet.get(clickedItemIndex);
