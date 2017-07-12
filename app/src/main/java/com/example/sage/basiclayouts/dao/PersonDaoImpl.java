@@ -72,7 +72,7 @@ public class PersonDaoImpl implements  PersonDao {
         return mDataSet.get(index);
     }
 
-    public Person getFromNumber(String phoneNumber){
+    public Person getByPhoneNumber(String phoneNumber){
         for (Person potentialMatch:mDataSet){
             if (potentialMatch.getPhoneNumber().equals(phoneNumber)){
                 return potentialMatch;

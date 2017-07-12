@@ -6,7 +6,7 @@ import java.util.Collection;
  * Created by ido on 11/06/17.
  */
 
-interface PersonDao {
+public interface PersonDao {
     Collection<Person> load();
 
     boolean save(Person person);
@@ -15,4 +15,6 @@ interface PersonDao {
     boolean delete(Person person);
 
     boolean delete(String phoneNumber);
+
+    Person getByPhoneNumber(String phoneNumber);
 }
