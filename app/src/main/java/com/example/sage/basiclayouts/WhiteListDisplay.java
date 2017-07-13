@@ -9,14 +9,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.sage.basiclayouts.dao.Person;
+import com.example.sage.basiclayouts.dao.PersonDao;
 import com.example.sage.basiclayouts.dao.PersonDaoImpl;
 
 import java.util.Collection;
 
 public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.ContactViewHolder>{
 
-    public PersonDaoImpl contactsInMemory;
-    private Collection<Person> mContactList;
+    public PersonDaoImpl contactsInMemory = new PersonDaoImpl();
+    public Collection<Person> mContactList;
 
 
     private ListItemClickListener mOnClickListener;

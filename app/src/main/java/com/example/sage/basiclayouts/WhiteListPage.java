@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,14 +17,10 @@ import com.example.sage.basiclayouts.dao.Person;
 import com.example.sage.basiclayouts.dao.PersonDao;
 import com.example.sage.basiclayouts.dao.PersonDaoImpl;
 
-/**
- * Created by sage on 6/13/17.
- */
-
-public class MainActivity extends AppCompatActivity implements ListItemClickListener {
+public class WhiteListPage extends AppCompatActivity implements ListItemClickListener{
 
     private RecyclerView mContactList;
-    private Button makeContact;
+    private FloatingActionButton makeContact;
     public PersonDao contactsInMemory = new PersonDaoImpl();
     public Context context = this;
 
@@ -29,17 +28,13 @@ public class MainActivity extends AppCompatActivity implements ListItemClickList
     private WhiteListDisplay mAdapter = new WhiteListDisplay(this);
 
 
-
-
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_white_list_display);
+        setContentView(R.layout.activity_white_list_page);
 
         mContactList = (RecyclerView) findViewById(R.id.whitelist);
-        makeContact = (Button) findViewById(R.id.add_contact);
+        makeContact = (FloatingActionButton) findViewById(R.id.add_contact);
         makeContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,8 +55,6 @@ public class MainActivity extends AppCompatActivity implements ListItemClickList
         mAdapter.notifyDataSetChanged();
     }
 
-    @Override
-
 
 
     public void onListItemClick(int clickedItemIndex) {
@@ -75,3 +68,4 @@ public class MainActivity extends AppCompatActivity implements ListItemClickList
         //TODO to the current firstname, lastname, and phonenumber of the contact (THIS IS OPTIONAL)
     }
 }
+
