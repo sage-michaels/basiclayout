@@ -43,10 +43,6 @@ public class ContactPage extends AppCompatActivity {
             lastName.setText(contactToEdit.getLastName());
             phoneNumber.setText(contactToEdit.getPhoneNumber());
             //We are editing a contact so change Hints to be previous first/last names and number
-        } else {
-            firstName.setHint("Enter First Name");
-            lastName.setHint("Enter Last Name");
-            phoneNumber.setHint("Enter Phone Number");
         }
         submitContact.setOnClickListener(new View.OnClickListener() {
             @Override
