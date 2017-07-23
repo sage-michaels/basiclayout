@@ -28,7 +28,7 @@ public class ContactPage extends AppCompatActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.editcontactpage);
+        setContentView(R.layout.activity_contact_submission_page);
         final Intent intentThatCreatedThisPage = getIntent();
 
 
