@@ -17,11 +17,14 @@ import com.example.sage.basiclayouts.dao.Person;
 import com.example.sage.basiclayouts.dao.PersonDao;
 import com.example.sage.basiclayouts.dao.PersonDaoImpl;
 
+import java.util.ArrayList;
+
 public class WhiteListPage extends AppCompatActivity implements ListItemClickListener{
 
     private RecyclerView mContactList;
     private FloatingActionButton makeContact;
     public PersonDao contactsInMemory = new PersonDaoImpl();
+    public ArrayList<Person> contactList;
     public Context context = this;
 
 
@@ -32,7 +35,7 @@ public class WhiteListPage extends AppCompatActivity implements ListItemClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_white_list_page);
-
+        contactList = contactsInMemory.load();
         mContactList = (RecyclerView) findViewById(R.id.whitelist);
         makeContact = (FloatingActionButton) findViewById(R.id.add_contact);
         makeContact.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +61,7 @@ public class WhiteListPage extends AppCompatActivity implements ListItemClickLis
 
 
     public void onListItemClick(int clickedItemIndex) {
-        Person toEdit = this.mAdapter.contactsInMemory.get(clickedItemIndex);
+        Person toEdit = this.mAdapter.mContactList.get(clickedItemIndex);
         String toEditNumber = toEdit.getPhoneNumber();
         Intent intent = new Intent(context, ContactPage.class );
         intent.putExtra("number", toEditNumber);

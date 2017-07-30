@@ -24,7 +24,7 @@ public class PersonDaoImpl implements  PersonDao {
     static ArrayList<Person> mDataSet = new ArrayList(Arrays.asList(adapterData));
 
     @Override
-    public Collection<Person> load(){
+    public ArrayList<Person> load(){
         //TODO read from a json file and convert it to Person objects
         return mDataSet; // TODO change once implemented
 

@@ -1,5 +1,6 @@
 package com.example.sage.basiclayouts.dao;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Collection;
  */
 
 public interface PersonDao {
-    Collection<Person> load();
+    ArrayList<Person> load();
 
     boolean save(Person person);
 

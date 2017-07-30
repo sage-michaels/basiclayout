@@ -50,7 +50,7 @@ public class ContactPage extends AppCompatActivity {
                 String fName = getFirstName();
                 String lName = getLastName();
                 String pNumber = getPhoneNumber();
-                if ((fName.isEmpty()) && (lName.isEmpty()) && (pNumber.isEmpty())) {
+                if ((fName.isEmpty()) || (lName.isEmpty()) || (pNumber.isEmpty())) {
                     Toast.makeText(ContactPage.this, "Please complete all requested fields", Toast.LENGTH_SHORT).show();
                 } else if (intentThatCreatedThisPage.hasExtra("number")) {
                     String prevNumber = intentThatCreatedThisPage.getStringExtra("number");

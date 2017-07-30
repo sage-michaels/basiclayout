@@ -12,12 +12,13 @@ import com.example.sage.basiclayouts.dao.Person;
 import com.example.sage.basiclayouts.dao.PersonDao;
 import com.example.sage.basiclayouts.dao.PersonDaoImpl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.ContactViewHolder>{
 
-    public PersonDaoImpl contactsInMemory = new PersonDaoImpl();
-    public Collection<Person> mContactList;
+    public PersonDao contactsInMemory = new PersonDaoImpl();
+    public ArrayList<Person> mContactList;
 
 
     private ListItemClickListener mOnClickListener;
@@ -48,7 +49,7 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
 
     @Override
     public int getItemCount() {
-        return contactsInMemory.size();
+        return mContactList.size();
     }
 
     /** View Holder below**/
@@ -62,10 +63,10 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
         public void onClick(View clickedView) {
             int clickedPosition = getAdapterPosition();
             if (clickedView == deleteContact){
-                Person toDelete = contactsInMemory.get(clickedPosition);
+                Person toDelete = mContactList.get(clickedPosition);
                 contactsInMemory.delete(toDelete);
                 notifyItemRemoved(clickedPosition);
-                notifyItemRangeChanged(clickedPosition, contactsInMemory.size());
+                notifyItemRangeChanged(clickedPosition, mContactList.size());
                 mContactList = contactsInMemory.load();
                 //TODO make sure contact is removed from memory
             }else{
@@ -84,7 +85,7 @@ public class  WhiteListDisplay extends RecyclerView.Adapter<WhiteListDisplay.Con
 
 
         void bind(int listIndex) {
-            Person contact = contactsInMemory.get(listIndex);
+            Person contact = mContactList.get(listIndex);
             String firstName = contact.getFirstName();
             String lastName = contact.getLastName();
             listItemContactView.setText(firstName + " " + lastName);
