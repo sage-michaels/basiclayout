@@ -1,82 +1,152 @@
 package com.example.sage.basiclayouts.dao;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 
 /**
- * Created by ido on 11/06/17.
+ * Created by Ido Izaks on 16/07/2017.
  */
 
-public class PersonDaoImpl implements  PersonDao {
-    static Person sage = new Person("Sage","Michaels","0018587768475");
-    static Person john = new Person("John","Smith","12345678910");
-    static Person jane = new Person("Jane","Doe","10987654321");
-    static Person carlos = new Person("Carlos","Mancia","188849339203");
-    static Person larry = new Person("Larry", "David", "9948573920");
-    static Person larryR = new Person("Larry","Rubin","99573663842");
-    static Person danny = new Person("Danny","Lim","885930521");
-    static Person lebron = new Person("Lebron", "James", "55473648");
-    static Person luke = new Person("Luke","Skywalker","994739958");
-    static Person[] adapterData = new Person[] {luke,sage, john,larry,jane,danny,carlos, larryR,lebron};
-    static ArrayList<Person> mDataSet = new ArrayList(Arrays.asList(adapterData));
+public class PersonDaoImpl implements PersonDao {
+
+
+    private File file = null;
+
+    private String folderPath = null;
 
     @Override
-    public ArrayList<Person> load(){
-        //TODO read from a json file and convert it to Person objects
-        return mDataSet; // TODO change once implemented
-
+    public void setFolderPath(String folderPath) {
+        this.folderPath = folderPath;
     }
 
-
-    @Override
-    public boolean save(Person person){
-        for (Person check: mDataSet){
-            if (check.getPhoneNumber()== person.getPhoneNumber()){
-                return false;
-            }
-        }mDataSet.add(person);
-        // TODO read all the Persons from the file and merge/add the new one and save it to the file
-        return true;
+    private void init() {
+        file = new File(folderPath, "personList.txt");
     }
 
-    // TODO implement the deletion using both methods
     @Override
-    public boolean delete(Person person){
-        for (Person check:mDataSet){
-            if (person == check){
-                mDataSet.remove(check);
-                return true;
+    public ArrayList<Person> load() {
+
+        if(file == null){
+            init();
+        }
+        ArrayList<Person> persons = null;
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<Person>>() {
+        }.getType();
+
+        try {
+            FileReader fileReader = new FileReader(file);
+            persons = gson.fromJson(fileReader, type);
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (persons == null){
+            return new ArrayList<Person>();
+        }
+
+        Collections.sort(persons, new NameComparator());
+        return persons;
+    }
+
+    private boolean flash(ArrayList<Person> personsList) {
+        if(file == null){
+            init();
+        }
+        try {
+            Gson gson = new Gson();
+            Type type = new TypeToken<ArrayList<Person>>() {
+            }.getType();
+            FileWriter fileWriter = new FileWriter(file);
+            gson.toJson(personsList, type, fileWriter);
+            fileWriter.close();
+            return true;
+
+        } catch (IOException e) {
+            throw new FilesException("Error occurred while writing into the file", e);
+            // TODO: 30/07/2017 Log it!
+        }
+    }
+
+    @Override
+    public boolean save(Person person) {
+        if (person.getPhoneNumber() == null){
+            throw new PersonDetailsException("NOTICE: A contact must have a phone number");
+            // TODO: 30/07/2017 Log it?
+        }
+        if (person.getFirstName() == null && person.getLastName() == null){
+            throw new PersonDetailsException("NOTICE: A contact must have a name");
+            // TODO: 30/07/2017 Log it?
+        }
+        ArrayList<Person> personsList = load();
+        for (Person p : personsList) {
+
+            if (p.getPhoneNumber().equals(person.getPhoneNumber())) {
+                personsList.remove(p);
+                personsList.add(person);
+                return flash(personsList);
             }
         }
-        return  false;
+        personsList.add(person);
+        return flash(personsList);
     }
 
     @Override
-    public boolean delete(String phoneNumber){
-        for (Person contact:mDataSet){
-            if (contact.getPhoneNumber() == phoneNumber ){
-                mDataSet.remove(contact);
-                return true;
+    public boolean delete(Person person) {
+        if (person.getPhoneNumber() == null ||
+                (person.getFirstName() == null && person.getLastName() == null)){
+            throw new PersonDetailsException("NOTICE: A contact must have a name and phone number");
+        }
+        return delete(person.getPhoneNumber());
+    }
+
+    @Override
+    public boolean delete(String phoneNumber) {
+        if (phoneNumber == null){
+            throw new PersonDetailsException("Please enter a phone number to delete");
+        }
+        ArrayList<Person> personsList = load();
+        ArrayList<Person> personsToDelete = new ArrayList<>();
+        if (personsList == null){
+            return true;
+        }
+
+        for (Person person : personsList) {
+            if (person.getPhoneNumber() != null &&
+                    person.getPhoneNumber().equals(phoneNumber)) {
+                personsToDelete.add(person);
             }
         }
-        return false;
+
+        if (personsToDelete.size() == 0){
+            return false;
+        }
+        personsList.removeAll(personsToDelete);
+        return flash(personsList);
     }
 
-    public int size(){
-        return mDataSet.size();
-    }
-    public Person get(int index){
-        return mDataSet.get(index);
-    }
-
+    @Override
     public Person getByPhoneNumber(String phoneNumber){
-        for (Person potentialMatch:mDataSet){
-            if (potentialMatch.getPhoneNumber().equals(phoneNumber)){
-                return potentialMatch;
+
+        for (Person person : load()){
+            if (person.getPhoneNumber().equals(phoneNumber)){
+                return person;
             }
-        }return new Person("","","");
+        }
+        // The number wasn't found
+        throw new PersonDetailsException("The number doesn't belong to any person");
     }
+
 }

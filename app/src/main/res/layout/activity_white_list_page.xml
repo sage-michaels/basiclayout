@@ -80,6 +80,6 @@
         app:layout_anchorGravity="bottom|end"
         app:backgroundTint="@color/colorAccent"
         app:layout_anchor="@id/app_bar"
-        app:srcCompat="@drawable/ic_add_black_24dp" />
+        app:srcCompat="@drawable/addcontact" />
 
 </android.support.design.widget.CoordinatorLayout>

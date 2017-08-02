@@ -1,18 +1,11 @@
 package com.example.sage.basiclayouts.dao;
 
-import android.os.Bundle;
+import java.util.Comparator;
 
-/**
- * Created by ido on 11/06/17.
- */
-
-public class Person {
-
+public class Person implements Comparator<Person> {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-
-
 
 
     public String getFirstName() {
@@ -39,18 +32,12 @@ public class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public Person(String firstName,String lastName, String phoneNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-    }
-
     @Override
     public String toString() {
         return "Person{" +
-                "firstName='" + this.getFirstName() + '\'' +
-                ", lastName='" + this.getLastName() + '\'' +
-                ", phoneNumber='" + this.getPhoneNumber() + '\'' +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 
@@ -76,4 +63,12 @@ public class Person {
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public int compare(Person person1, Person person2){
+        String name1 = person1.getFirstName() + person1.getLastName();
+        String name2 = person2.getFirstName() + person2.getLastName();
+        return name1.compareTo(name2);
+    }
+
 }

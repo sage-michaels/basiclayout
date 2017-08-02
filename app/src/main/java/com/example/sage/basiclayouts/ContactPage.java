@@ -1,29 +1,29 @@
 package com.example.sage.basiclayouts;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+
 
 import com.example.sage.basiclayouts.dao.Person;
 import com.example.sage.basiclayouts.dao.PersonDao;
 import com.example.sage.basiclayouts.dao.PersonDaoImpl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 /**
  * Created by sage on 6/27/17.
  */
 
-public class ContactPage extends AppCompatActivity {
+public class ContactPage extends AppCompatActivity{
     private EditText firstName;
     private EditText lastName;
     private EditText phoneNumber;
-    private Button submitContact;
+    private LinearLayout submitContact;
     private PersonDao contacts = new PersonDaoImpl();
 
     public void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class ContactPage extends AppCompatActivity {
         firstName = (EditText) findViewById(R.id.firstNameInput);
         lastName = (EditText) findViewById(R.id.lastNameInput);
         phoneNumber = (EditText) findViewById(R.id.phoneNumberInput);
-        submitContact = (Button) findViewById(R.id.submit);
+        submitContact = (LinearLayout) findViewById(R.id.submit);
         if (intentThatCreatedThisPage.hasExtra("number")) {
             String prevNumber = intentThatCreatedThisPage.getStringExtra("number");
             Person contactToEdit = contacts.getByPhoneNumber(prevNumber);
@@ -52,6 +52,19 @@ public class ContactPage extends AppCompatActivity {
                 String pNumber = getPhoneNumber();
                 if ((fName.isEmpty()) || (lName.isEmpty()) || (pNumber.isEmpty())) {
                     Toast.makeText(ContactPage.this, "Please complete all requested fields", Toast.LENGTH_SHORT).show();
+                    if (fName.isEmpty()) {
+                        firstName.setBackgroundColor(Color.parseColor("#0fff0000"));
+                    }if(!fName.isEmpty()){
+                        firstName.setBackgroundColor(Color.parseColor("#00000000"));
+                    }if(lName.isEmpty()){
+                            lastName.setBackgroundColor(Color.parseColor("#0fff0000"));
+                    }if (!lName.isEmpty()){
+                        lastName.setBackgroundColor(Color.parseColor("#00000000"));
+                    }if (pNumber.isEmpty()){
+                        phoneNumber.setBackgroundColor(Color.parseColor("#0fff0000"));
+                    }if(!pNumber.isEmpty()){
+                        phoneNumber.setBackgroundColor(Color.parseColor("#00000000"));
+                    }
                 } else if (intentThatCreatedThisPage.hasExtra("number")) {
                     String prevNumber = intentThatCreatedThisPage.getStringExtra("number");
                     Person contactToEdit = contacts.getByPhoneNumber(prevNumber);
@@ -60,7 +73,10 @@ public class ContactPage extends AppCompatActivity {
                     contactToEdit.setPhoneNumber(pNumber);
                     finish();
                 } else {
-                    Person person = new Person(fName, lName, pNumber);
+                    Person person = new Person();
+                    person.setFirstName(fName);
+                    person.setLastName(lName);
+                    person.setPhoneNumber(pNumber);
                     if (contacts.save(person)) {
                         finish();
                     }else{
