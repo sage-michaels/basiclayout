@@ -1,5 +1,7 @@
 package com.example.sage.basiclayouts.dao;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -30,6 +32,16 @@ public class PersonDaoImpl implements PersonDao {
 
     private void init() {
         file = new File(folderPath, "personList.txt");
+    }
+
+    /**
+     * Use this method in order to get the folder path in the internal storage.
+     */
+    @Override
+    public String getDataDir(Context context) throws Exception {
+        return context.getPackageManager()
+                .getPackageInfo(context.getPackageName(), 0)
+                .applicationInfo.dataDir;
     }
 
     @Override

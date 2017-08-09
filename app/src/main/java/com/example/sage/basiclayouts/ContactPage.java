@@ -1,5 +1,6 @@
 package com.example.sage.basiclayouts;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,6 +26,9 @@ public class ContactPage extends AppCompatActivity{
     private EditText phoneNumber;
     private LinearLayout submitContact;
     private PersonDao contacts = new PersonDaoImpl();
+    public Context context = this;
+
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,16 @@ public class ContactPage extends AppCompatActivity{
         submitContact = (LinearLayout) findViewById(R.id.submit);
         if (intentThatCreatedThisPage.hasExtra("number")) {
             String prevNumber = intentThatCreatedThisPage.getStringExtra("number");
+
+            String path;
+            try{
+                path = contacts.getDataDir(context);
+                contacts.setFolderPath(path);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+
+
             Person contactToEdit = contacts.getByPhoneNumber(prevNumber);
             firstName.setText(contactToEdit.getFirstName());
             lastName.setText(contactToEdit.getLastName());

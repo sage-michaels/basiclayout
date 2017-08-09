@@ -35,6 +35,14 @@ public class WhiteListPage extends AppCompatActivity implements ListItemClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_white_list_page);
+        String path;
+        try{
+            path = contactsInMemory.getDataDir(context);
+            contactsInMemory.setFolderPath(path);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         contactList = contactsInMemory.load();
         mContactList = (RecyclerView) findViewById(R.id.whitelist);
         makeContact = (FloatingActionButton) findViewById(R.id.add_contact);
